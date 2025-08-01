@@ -13,10 +13,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const HeroSection = () => {
   useGSAP(() => {
-    const titleSplit = SplitText.create('#end p', {
-      type: 'words'
-    })
-
     const scrollTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#end",
@@ -24,16 +20,16 @@ const HeroSection = () => {
       },
     });
 
-    scrollTimeline
-    .from(titleSplit.words, {
-      opacity: 0, duration: 1, yPercent: 100, ease: 'expo.out', stagger: 0.02
-    })
-    .from("#end1 div", {
-      opacity: 0,
-      duration: 1,
-      ease: "power1.inOut",
-      stagger: 0.04,
-    }, '-=0.5');
+    scrollTimeline.from(
+      "#end1 div",
+      {
+        opacity: 0,
+        duration: 1,
+        ease: "power1.inOut",
+        stagger: 0.04,
+      },
+      "-=0.5"
+    );
   });
 
   return (
@@ -69,12 +65,14 @@ const HeroSection = () => {
             <p className="text-foreground">Choose your fun holiday</p>
           </div>
           <div id="end" className="flex flex-col md:flex-row gap-3">
-            <p className="text-foreground sm:max-w-1/3">
-              The Raja Ampat Islands are a group of islands located in the
-              waters east of Bali in the territory of Indonesia in the Banda
-              Sea, administratively. The cluster is under the Raja Ampat
-              Regency.
-            </p>
+            <div className="sm:max-w-1/3">
+              <TextAnimate className="!text-background" animation="blurIn" as="h1" delay={1} duration={2}>
+                The Raja Ampat Islands are a group of islands located in the
+                waters east of Bali in the territory of Indonesia in the Banda
+                Sea, administratively. The cluster is under the Raja Ampat
+                Regency.
+              </TextAnimate>
+            </div>
             <div id="end1" className="flex flex-col md:flex-row gap-3">
               <VideoPlayerDemo />
               <div className="relative w-full max-w-2xl mx-auto p-4">

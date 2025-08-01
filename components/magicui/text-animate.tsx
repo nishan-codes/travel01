@@ -394,7 +394,7 @@ const TextAnimateBase = ({
             custom={i * staggerTimings[by]}
             className={cn(
               by === "line" ? "block" : "inline-block whitespace-pre",
-              by === "character" && "", "text-foreground",
+              by === "character" && "", "text-white",
               segmentClassName,
             )}
           >
