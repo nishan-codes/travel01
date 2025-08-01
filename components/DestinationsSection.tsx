@@ -1,6 +1,4 @@
 "use client";
-
-import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,33 +10,21 @@ import { TextAnimate } from "./magicui/text-animate";
 gsap.registerPlugin(ScrollTrigger);
 
 const DestinationsSection = () => {
-  const leftLineRef = useRef(null);
-  const rightLineRef = useRef(null);
-  const linesWrapperRef = useRef(null); // Container to observe for scroll trigger
-
   useGSAP(() => {
-    const tl = gsap.timeline({
+    const scrollTimeline = gsap.timeline({
       scrollTrigger: {
-        trigger: linesWrapperRef.current,
-        start: "top 80%", // When the top of the line container hits 80% of the viewport
-        toggleActions: "play none none none", // Play only once
+        trigger: "#parent",
+        start: "top bottom",
       },
     });
 
-    tl.to(leftLineRef.current, {
-      width: "40%",
-      duration: 1,
-      ease: "power2.out",
-    }).to(
-      rightLineRef.current,
-      {
-        width: "40%",
-        duration: 1,
-        ease: "power2.out",
-      },
-      "-=0.8"
-    );
-  }, []);
+    scrollTimeline.from(".card", {
+      opacity: 0,
+      duration: 3,
+      ease: "power1.inOut",
+      stagger: 0.04,
+    });
+  });
 
   const destinations = [
     {
@@ -77,6 +63,8 @@ const DestinationsSection = () => {
               className="font-semibold text-md"
               animation="blurIn"
               as="h1"
+              by="character"
+              duration={2}
             >
               confusion? These recommendations
             </TextAnimate>
@@ -86,6 +74,8 @@ const DestinationsSection = () => {
               className="text-2xl lg:text-3xl font-bold text-foreground"
               animation="blurIn"
               as="h1"
+              by="character"
+              duration={2}
             >
               Destination Recommendations
             </TextAnimate>
@@ -93,39 +83,32 @@ const DestinationsSection = () => {
         </div>
 
         {/* Destination Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div
+          id="parent"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
           {destinations.map((destination, index) => (
-            <DestinationCard
-              key={index}
-              image={destination.image}
-              title={destination.title}
-              subtitle={destination.subtitle}
-              ranking={destination.ranking}
-            />
+            <div className="card" key={index}>
+              <DestinationCard
+                image={destination.image}
+                title={destination.title}
+                subtitle={destination.subtitle}
+                ranking={destination.ranking}
+              />
+            </div>
           ))}
         </div>
 
         {/* Animated Lines with ScrollTrigger */}
-        <div
-          ref={linesWrapperRef}
-          className="flex justify-between items-center mt-16"
-        >
+        <div className="flex justify-between items-center mt-16">
           {/* Left Line */}
-          <div
-            ref={leftLineRef}
-            className="h-1 bg-white rounded"
-            style={{ width: "0%" }}
-          ></div>
+          <div className="h-1 bg-white rounded" style={{ width: "0%" }}></div>
 
           {/* Spacer */}
           <div className="w-1/4"></div>
 
           {/* Right Line */}
-          <div
-            ref={rightLineRef}
-            className="h-1 bg-white rounded"
-            style={{ width: "0%" }}
-          ></div>
+          <div className="h-1 bg-white rounded" style={{ width: "0%" }}></div>
         </div>
       </div>
     </section>

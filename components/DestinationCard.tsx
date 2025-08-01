@@ -3,11 +3,12 @@ interface DestinationCardProps {
   title: string;
   subtitle: string;
   ranking: string;
+  className?: string;
 }
 
-const DestinationCard = ({ image, title, subtitle, ranking }: DestinationCardProps) => {
+const DestinationCard = ({ image, title, subtitle, ranking, className }: DestinationCardProps) => {
   return (
-    <div className="group relative overflow-hidden rounded-xl aspect-[4/5] cursor-pointer">
+    <div className={`group relative overflow-hidden rounded-xl aspect-[4/5] cursor-pointer ${className}`}>
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center transition-transform duration-250 group-hover:scale-105"
