@@ -11,6 +11,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const DestinationsSection = () => {
   useGSAP(() => {
+    const isSmallScreen = window.innerWidth < 1024;
+
     const scrollTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#parent",
@@ -26,18 +28,43 @@ const DestinationsSection = () => {
     // });
 
     gsap.utils.toArray(".card").forEach((card, index) => {
-      gsap.from(card, {
-        opacity: 0,
-        y: 40,
-        duration: 1,
-        delay: index * 0.1,
+      const animationProps = isSmallScreen
+        ? { x: index % 2 === 0 ? -100 : 100, opacity: 0 }
+        : { x: index < 2 ? -100 : 100, opacity: 0 };
+
+      const finalProps = {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        duration: 1.5,
         ease: "power2.out",
         scrollTrigger: {
           trigger: card,
-          start: "top 85%",
+          start: "top center",
           toggleActions: "play none none none",
         },
-      });
+      };
+
+      gsap.fromTo(card, animationProps, finalProps);
+
+      // gsap.fromTo(
+      //   card,
+      //   {
+      //     x: direction,
+      //     opacity: 0,
+      //   },
+      //   {
+      //     x: 0,
+      //     opacity: 1,
+      //     duration: 1,
+      //     ease: "power3.out",
+      //     scrollTrigger: {
+      //       trigger: card,
+      //       start: "top center",
+      //       toggleActions: "play none none none",
+      //     },
+      //   }
+      // );
     });
 
     gsap.to("#left", {
