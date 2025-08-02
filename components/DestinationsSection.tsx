@@ -18,11 +18,26 @@ const DestinationsSection = () => {
       },
     });
 
-    scrollTimeline.from(".card", {
-      opacity: 0,
-      duration: 3,
-      ease: "power1.inOut",
-      stagger: 0.04,
+    // scrollTimeline.from(".card", {
+    //   opacity: 0,
+    //   duration: 3,
+    //   ease: "power1.inOut",
+    //   stagger: 0.04,
+    // });
+
+    gsap.utils.toArray(".card").forEach((card: any, index: number) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        delay: index * 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      });
     });
 
     gsap.to("#left", {
