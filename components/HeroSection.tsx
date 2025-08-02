@@ -80,7 +80,7 @@ const HeroSection = () => {
                 <span
                   className={`${
                     num.active ? "active" : ""
-                  } text-foreground inline-block text-lg sm:text-2xl md:text-3xl max-w-1/4 font-bold lg:text-4xl lg:max-w-sm`}
+                  } text-foreground inline-block text-lg sm:text-2xl md:text-3xl max-w-full font-bold lg:text-4xl lg:max-w-sm`}
                 >
                   <TextAnimate
                     animation="blurInUp"

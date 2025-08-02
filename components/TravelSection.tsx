@@ -16,19 +16,18 @@ const HeroSection = () => {
     const scrollTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#end",
-        start: "top bottom",
+        start: "top 80%",
       },
     });
 
     scrollTimeline.from(
-      "#end1 div",
+      "#end1",
       {
         opacity: 0,
-        duration: 1,
-        ease: "power1.inOut",
-        stagger: 0.04,
-      },
-      "-=0.5"
+        y: 50,
+        duration: 1.2,
+        ease: "power2.out",
+      }
     );
   });
 

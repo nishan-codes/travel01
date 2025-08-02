@@ -24,6 +24,26 @@ const DestinationsSection = () => {
       ease: "power1.inOut",
       stagger: 0.04,
     });
+
+    gsap.to("#left", {
+      width: "33.3333%", // 1/3 of 100%
+      duration: 1.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#lines",
+        start: "top bottom",
+      },
+    });
+
+    gsap.to("#right", {
+      width: "33.3333%",
+      duration: 1.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#lines",
+        start: "top bottom",
+      },
+    });
   });
 
   const destinations = [
@@ -100,15 +120,15 @@ const DestinationsSection = () => {
         </div>
 
         {/* Animated Lines with ScrollTrigger */}
-        <div className="flex justify-between items-center mt-16">
+        <div id="lines" className="flex justify-between items-center mt-16">
           {/* Left Line */}
-          <div className="h-1 bg-white rounded" style={{ width: "0%" }}></div>
+          <div id="left" className="h-1 bg-white rounded w-0"></div>
 
           {/* Spacer */}
           <div className="w-1/4"></div>
 
           {/* Right Line */}
-          <div className="h-1 bg-white rounded" style={{ width: "0%" }}></div>
+          <div id="right" className="h-1 bg-white rounded w-0"></div>
         </div>
       </div>
     </section>
