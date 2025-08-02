@@ -25,7 +25,7 @@ const DestinationsSection = () => {
     //   stagger: 0.04,
     // });
 
-    gsap.utils.toArray(".card").forEach((card: any, index: number) => {
+    gsap.utils.toArray(".card").forEach((card, index) => {
       gsap.from(card, {
         opacity: 0,
         y: 40,
